@@ -1,113 +1,89 @@
-import Image from "next/image";
+// src/pages/index.tsx
+"use client";
 
-export default function Home() {
+import React, { useEffect } from 'react';
+import DynamicPeninsula from '../components/DynamicPeninsula';
+import BuyButton from '../components/BuyButton';
+import LearnMoreButton from '../components/LearnMoreButton';
+import Section from '../components/Section';
+import styles from '../styles/Home.module.css';
+
+const Home: React.FC = () => {
+
+  // Add smooth scroll effect
+  useEffect(() => {
+    let timeout: NodeJS.Timeout;
+    const handleScroll = (e: WheelEvent) => {
+      e.preventDefault();
+      if (timeout) clearTimeout(timeout);
+      timeout = setTimeout(() => {
+        const delta = Math.sign(e.deltaY);
+        const sections = document.querySelectorAll(`.${styles.sectionWrapper}`);
+        let currentSection = 0;
+        sections.forEach((section, index) => {
+          if (window.scrollY >= section.offsetTop && window.scrollY < section.offsetTop + section.clientHeight) {
+            currentSection = index;
+          }
+        });
+        const nextSection = Math.min(
+          sections.length - 1,
+          Math.max(0, currentSection + delta)
+        );
+        sections[nextSection].scrollIntoView({ behavior: 'smooth' });
+      }, 150);
+    };
+    window.addEventListener('wheel', handleScroll, { passive: false });
+    return () => window.removeEventListener('wheel', handleScroll);
+  }, []);
+
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="z-10 w-full max-w-5xl items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          Get started by editing&nbsp;
-          <code className="font-mono font-bold">src/app/page.tsx</code>
-        </p>
-        <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:size-auto lg:bg-none">
-          <a
-            className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{" "}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className="dark:invert"
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
+    <div className={styles.container}>
+      <div className={styles.sectionWrapper}>
+        <div className={styles.background}></div>
+        <div className={styles.floatingDots}>
+          <div className={`${styles.dot} ${styles.dot1}`}></div>
+          <div className={`${styles.dot} ${styles.dot2}`}></div>
+          <div className={`${styles.dot} ${styles.dot3}`}></div>
+          <div className={`${styles.dot} ${styles.dot4}`}></div>
+          <div className={`${styles.dot} ${styles.dot5}`}></div>
+          <div className={`${styles.dot} ${styles.dot6}`}></div>
+          <div className={`${styles.dot} ${styles.dot7}`}></div>
+          <div className={`${styles.dot} ${styles.dot8}`}></div>
         </div>
+        <h1 className={styles.title}>
+          <span className={styles.highlight}>Fluid</span>Noti
+        </h1>
+        <div className={styles.separator}></div>
+        <p className={styles.description}>A dynamic island experience for your MacBook</p>
+        <div className={styles.buttonGroup}>
+          <BuyButton />
+          <LearnMoreButton />
+        </div>
+        <DynamicPeninsula />
       </div>
 
-      <div className="relative z-[-1] flex place-items-center before:absolute before:h-[300px] before:w-full before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-full after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:from-sky-900 after:dark:via-[#0141ff] after:dark:opacity-40 sm:before:w-[480px] sm:after:w-[240px] before:lg:h-[360px]">
-        <Image
-          className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
+      <div className={styles.sectionWrapper}>
+        <Section 
+          title="Enhanced Productivity" 
+          content="Stay updated with real-time information right around your MacBook's notch. FluidNoti ensures you never miss important notifications and reminders."
         />
       </div>
 
-      <div className="mb-32 grid text-center lg:mb-0 lg:w-full lg:max-w-5xl lg:grid-cols-4 lg:text-left">
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Docs{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-sm opacity-50">
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Learn{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-sm opacity-50">
-            Learn about Next.js in an interactive course with&nbsp;quizzes!
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Templates{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-sm opacity-50">
-            Explore starter templates for Next.js.
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Deploy{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-balance text-sm opacity-50">
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
+      <div className={styles.sectionWrapper}>
+        <Section 
+          title="Seamless Integration" 
+          content="FluidNoti integrates seamlessly with macOS, providing instant access to notifications, reminders, and more, enhancing your workflow without interruptions."
+        />
       </div>
-    </main>
+
+      <div className={styles.sectionWrapper}>
+        <Section 
+          title="Customizable Experience" 
+          content="Tailor FluidNoti to your preferences with customizable settings, ensuring a personalized notification experience that fits your unique workflow."
+        />
+      </div>
+    </div>
   );
-}
+};
+
+export default Home;

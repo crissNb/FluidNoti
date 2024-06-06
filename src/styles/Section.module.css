@@ -1,0 +1,23 @@
+/* src/styles/Section.module.css */
+.section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  padding: 20px;
+  background: #1a1a1a;
+  color: #fff;
+  text-align: center;
+}
+
+.sectionTitle {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.sectionContent {
+  font-size: 1.5rem;
+  line-height: 1.6;
+  max-width: 800px;
+}

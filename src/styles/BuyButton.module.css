@@ -1,0 +1,23 @@
+/* src/styles/BuyButton.module.css */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* src/styles/BuyButton.module.css */
+.buyButton {
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 1.2rem;
+  color: #fff;
+  background-color: #00d4ff;
+  border-radius: 5px;
+  text-align: center;
+  text-decoration: none;
+}
