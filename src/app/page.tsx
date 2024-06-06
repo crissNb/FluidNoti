@@ -8,30 +8,30 @@ import Section from '../components/Section';
 import styles from '../styles/Home.module.css';
 
 const Home: React.FC = () => {
-  useEffect(() => {
-    let timeout: NodeJS.Timeout;
-    const handleScroll = (e: WheelEvent) => {
-      e.preventDefault();
-      if (timeout) clearTimeout(timeout);
-      timeout = setTimeout(() => {
-        const delta = Math.sign(e.deltaY);
-        const sections = document.querySelectorAll(`.${styles.sectionWrapper}`);
-        let currentSection = 0;
-        sections.forEach((section, index) => {
-          if (window.scrollY >= section.offsetTop && window.scrollY < section.offsetTop + section.clientHeight) {
-            currentSection = index;
-          }
-        });
-        const nextSection = Math.min(
-          sections.length - 1,
-          Math.max(0, currentSection + delta)
-        );
-        sections[nextSection].scrollIntoView({ behavior: 'smooth' });
-      }, 150);
-    };
-    window.addEventListener('wheel', handleScroll, { passive: false });
-    return () => window.removeEventListener('wheel', handleScroll);
-  }, []);
+    useEffect(() => {
+        let timeout: NodeJS.Timeout;
+        const handleScroll = (e: WheelEvent) => {
+            e.preventDefault();
+            if (timeout) clearTimeout(timeout);
+            timeout = setTimeout(() => {
+                const delta = Math.sign(e.deltaY);
+                const sections = document.querySelectorAll(`.${styles.sectionWrapper}`);
+                let currentSection = 0;
+                sections.forEach((section, index) => {
+                    if (window.scrollY >= (section as HTMLElement).offsetTop && window.scrollY < (section as HTMLElement).offsetTop + (section as HTMLElement).clientHeight) {
+                        currentSection = index;
+                    }
+                });
+                const nextSection = Math.min(
+                    sections.length - 1,
+                    Math.max(0, currentSection + delta)
+                );
+                (sections[nextSection] as HTMLElement).scrollIntoView({ behavior: 'smooth' });
+            }, 150);
+        };
+        window.addEventListener('wheel', handleScroll, { passive: false });
+        return () => window.removeEventListener('wheel', handleScroll);
+    }, []);
 
   return (
     <div className={styles.container}>
