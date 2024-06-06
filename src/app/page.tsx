@@ -53,22 +53,22 @@ const Home: React.FC = () => {
 
       <div className={styles.sectionWrapper}>
         <Section 
-          title="Enhanced Productivity" 
-          content="Stay updated with real-time information right around your MacBook's notch. FluidNoti ensures you never miss important notifications and reminders."
+          title="Now Playing" 
+        content="FluidNoti supports Spotify, Apple Music, and other music players, displaying the current song and artist in a beautiful notification."
         />
       </div>
 
       <div className={styles.sectionWrapper}>
         <Section 
-          title="Seamless Integration" 
-          content="FluidNoti integrates seamlessly with macOS, providing instant access to notifications, reminders, and more, enhancing your workflow without interruptions."
+          title="Settings" 
+        content="FluidNoti allows you to customize the appearance of the notch, making it suitable for all kinds of MacBooks"
         />
       </div>
 
       <div className={styles.sectionWrapper}>
         <Section 
-          title="Customizable Experience" 
-          content="Tailor FluidNoti to your preferences with customizable settings, ensuring a personalized notification experience that fits your unique workflow."
+          title="and... more features to come" 
+          content="The app will be continuously updated with new features and bug fixes."
         />
       </div>
     </div>
