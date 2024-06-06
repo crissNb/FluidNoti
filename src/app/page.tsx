@@ -1,4 +1,3 @@
-// src/pages/index.tsx
 "use client";
 
 import React, { useEffect } from 'react';
@@ -9,8 +8,6 @@ import Section from '../components/Section';
 import styles from '../styles/Home.module.css';
 
 const Home: React.FC = () => {
-
-  // Add smooth scroll effect
   useEffect(() => {
     let timeout: NodeJS.Timeout;
     const handleScroll = (e: WheelEvent) => {
@@ -40,24 +37,16 @@ const Home: React.FC = () => {
     <div className={styles.container}>
       <div className={styles.sectionWrapper}>
         <div className={styles.background}></div>
-        <div className={styles.floatingDots}>
-          <div className={`${styles.dot} ${styles.dot1}`}></div>
-          <div className={`${styles.dot} ${styles.dot2}`}></div>
-          <div className={`${styles.dot} ${styles.dot3}`}></div>
-          <div className={`${styles.dot} ${styles.dot4}`}></div>
-          <div className={`${styles.dot} ${styles.dot5}`}></div>
-          <div className={`${styles.dot} ${styles.dot6}`}></div>
-          <div className={`${styles.dot} ${styles.dot7}`}></div>
-          <div className={`${styles.dot} ${styles.dot8}`}></div>
-        </div>
-        <h1 className={styles.title}>
-          <span className={styles.highlight}>Fluid</span>Noti
-        </h1>
-        <div className={styles.separator}></div>
-        <p className={styles.description}>A dynamic island experience for your MacBook</p>
-        <div className={styles.buttonGroup}>
-          <BuyButton />
-          <LearnMoreButton />
+        <div className={styles.centerWrapper}>
+          <h1 className={styles.title}>
+            <span className={styles.highlight}>Fluid</span>Noti
+          </h1>
+          <div className={styles.separator}></div>
+          <p className={styles.description}>A dynamic island experience for your MacBook</p>
+          <div className={styles.buttonGroup}>
+            <BuyButton />
+            <LearnMoreButton />
+          </div>
         </div>
         <DynamicPeninsula />
       </div>
