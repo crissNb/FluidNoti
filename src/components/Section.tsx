@@ -2,7 +2,7 @@ import styles from '../styles/Section.module.css';
 
 interface SectionProps {
   title: string;
-  content: string;
+  content: JSX.Element | string;
   videoUrl: string;
   reverse?: boolean;
 }

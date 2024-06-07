@@ -2,10 +2,10 @@ import styles from '../styles/MoreFeatures.module.css';
 
 interface MoreFeaturesProps {
   title: string;
-  content: string;
+  content: JSX.Element | string;
 }
 
-const MoreFeatures: React.FC<SectionProps> = ({ title, content }) => {
+const MoreFeatures: React.FC<MoreFeaturesProps> = ({ title, content }) => {
   return (
     <div className={`${styles.section}`}>
       <div className={styles.textWrapper}>
