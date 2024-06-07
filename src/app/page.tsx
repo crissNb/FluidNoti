@@ -5,6 +5,7 @@ import DynamicPeninsula from '../components/DynamicPeninsula';
 import BuyButton from '../components/BuyButton';
 import LearnMoreButton from '../components/LearnMoreButton';
 import Section from '../components/Section';
+import MoreFeatures from '../components/MoreFeatures';
 import styles from '../styles/Home.module.css';
 
 const Home: React.FC = () => {
@@ -42,7 +43,7 @@ const Home: React.FC = () => {
             <span className={styles.highlight}>Fluid</span>Noti
           </h1>
           <div className={styles.separator}></div>
-          <p className={styles.description}>A dynamic island experience for your MacBook</p>
+          <p className={styles.description}>Dynamic island experience for your MacBook</p>
           <div className={styles.buttonGroup}>
             <BuyButton />
             <LearnMoreButton />
@@ -54,21 +55,36 @@ const Home: React.FC = () => {
       <div className={styles.sectionWrapper}>
         <Section 
           title="Now Playing" 
-        content="FluidNoti supports Spotify, Apple Music, and other music players, displaying the current song and artist in a beautiful notification."
+        content={
+          <span>
+            <span className={styles.bold}>FluidNoti</span> supports Spotify, Apple Music, and other music players, displaying the current song and artist in a beautiful notification.
+          </span>
+        }
+          videoUrl="/nowplaying.png"
         />
       </div>
 
       <div className={styles.sectionWrapper}>
         <Section 
           title="Settings" 
-        content="FluidNoti allows you to customize the appearance of the notch, making it suitable for all kinds of MacBooks"
+          content= { 
+              <span>
+              <span className={styles.bold}>FluidNoti</span> allows you to customize the appearance of the notch, making it suitable for all kinds of MacBooks
+              </span>
+          }
+          videoUrl="/settings.png"
+          reverse
         />
       </div>
 
       <div className={styles.sectionWrapper}>
-        <Section 
+        <MoreFeatures 
           title="and... more features to come" 
-          content="The app will be continuously updated with new features and bug fixes."
+          content={
+              <span>
+              Stay tuned for <span className={styles.bold}>upcoming features</span> that will enhance your experience.
+                  </span>
+        }
         />
       </div>
     </div>

@@ -1,28 +1,14 @@
 /* src/styles/Section.module.css */
 .section {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   align-items: center;
   height: 100vh;
   padding: 20px;
-  max-width: 1200px;
   background: #000000;
   color: #fff;
-  gap: 20px;
-  text-align: left;
-}
-
-.imageWrapper {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.image {
-  max-width: 100%;
-  height: auto;
-  border-radius: 15px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  text-align: center;
 }
 
 .textWrapper {
@@ -47,13 +33,4 @@
   font-size: 1.25rem;
   line-height: 1.8;
   color: #ffffff;
-}
-
-/* Reverse the grid items */
-.reverse {
-  direction: rtl;
-}
-
-.reverse .textWrapper {
-  direction: ltr;
 }
