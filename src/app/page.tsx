@@ -54,7 +54,8 @@ const Home: React.FC = () => {
 
       <div className={styles.sectionWrapper}>
         <Section 
-          title="Now Playing" 
+          title={<span>< i class="ri-music-2-line"></i> Now Playing
+          </span>}
         content={
           <span>
             <span className={styles.bold}>FluidNoti</span> supports Spotify, Apple Music, and other music players, displaying the current song and artist in a beautiful notification.
@@ -66,7 +67,9 @@ const Home: React.FC = () => {
 
       <div className={styles.sectionWrapper}>
         <Section 
-          title="Settings" 
+          title={<span><i class="ri-settings-4-line"></i> Settings 
+ </span>
+          }
           content= { 
               <span>
               <span className={styles.bold}>FluidNoti</span> allows you to customize the appearance of the notch, making it suitable for all kinds of MacBooks
@@ -79,7 +82,10 @@ const Home: React.FC = () => {
 
       <div className={styles.sectionWrapper}>
         <MoreFeatures 
-          title="and... more features to come" 
+          title={
+              <span>
+              < i class="ri-bard-fill"></i> and... more features to come
+          </span>}
           content={
               <span>
               Stay tuned for <span className={styles.bold}>upcoming features</span> that will enhance your experience.

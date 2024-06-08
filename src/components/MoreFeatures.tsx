@@ -13,6 +13,7 @@ const MoreFeatures: React.FC<MoreFeaturesProps> = ({ title, content }) => {
         <h2 className={styles.sectionTitle}>{title}</h2>
         <p className={styles.sectionContent}>{content}</p>
       </div>
+      <br/>
       <BuyButton />
     </div>
   );
