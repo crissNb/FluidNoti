@@ -39,7 +39,7 @@
 .container {
   min-height: 100vh;
   scroll-snap-type: y mandatory;
-  overflow-y: scroll;
+  overflow-y: hidden;
   overflow-x: hidden;
   background: #000000;
   color: #000000;

@@ -1,4 +1,5 @@
 import styles from '../styles/MoreFeatures.module.css';
+import BuyButton from '../components/BuyButton';
 
 interface MoreFeaturesProps {
   title: string;
@@ -12,6 +13,7 @@ const MoreFeatures: React.FC<MoreFeaturesProps> = ({ title, content }) => {
         <h2 className={styles.sectionTitle}>{title}</h2>
         <p className={styles.sectionContent}>{content}</p>
       </div>
+      <BuyButton />
     </div>
   );
 };
