@@ -54,7 +54,7 @@ const Home: React.FC = () => {
 
       <div className={styles.sectionWrapper}>
         <Section 
-          title={<span>< i class="ri-music-2-line"></i> Now Playing
+          title={<span>< i className="ri-music-2-line"></i> Now Playing
           </span>}
         content={
           <span>
@@ -67,7 +67,7 @@ const Home: React.FC = () => {
 
       <div className={styles.sectionWrapper}>
         <Section 
-          title={<span><i class="ri-settings-4-line"></i> Settings 
+          title={<span><i className="ri-settings-4-line"></i> Settings 
  </span>
           }
           content= { 
@@ -84,7 +84,7 @@ const Home: React.FC = () => {
         <MoreFeatures 
           title={
               <span>
-              < i class="ri-bard-fill"></i> and... more features to come
+              < i className="ri-bard-fill"></i> and... more features to come
           </span>}
           content={
               <span>

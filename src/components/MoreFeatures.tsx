@@ -2,7 +2,7 @@ import styles from '../styles/MoreFeatures.module.css';
 import BuyButton from '../components/BuyButton';
 
 interface MoreFeaturesProps {
-  title: string;
+  title: JSX.Element | string;
   content: JSX.Element | string;
 }
 

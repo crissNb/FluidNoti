@@ -6,7 +6,7 @@ import 'remixicon/fonts/remixicon.css'
 const BuyButton: React.FC = () => {
   return (
     <a href="https://crissnb.gumroad.com/l/fluidnoti" className={styles.buyButton}>
-      < i class="ri-shopping-cart-2-line"></i> Buy
+      < i className="ri-shopping-cart-2-line"></i> Buy
     </a>
   );
 };
