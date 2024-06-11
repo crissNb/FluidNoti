@@ -1,99 +1,179 @@
 "use client";
 
-import React, { useEffect } from 'react';
-import DynamicPeninsula from '../components/DynamicPeninsula';
-import BuyButton from '../components/BuyButton';
-import LearnMoreButton from '../components/LearnMoreButton';
-import Section from '../components/Section';
-import MoreFeatures from '../components/MoreFeatures';
-import styles from '../styles/Home.module.css';
+import React, { useEffect, useRef, useState } from "react";
+import Button from "../components/Button";
+import SectionModule from "../components/Section";
+import MoreFeatures from "../components/MoreFeatures";
+import styles from "../styles/Home.module.scss";
+import { AnimatePresence, motion } from "framer-motion";
+import TopNav from "@/components/TopNav";
 
 const Home: React.FC = () => {
-    useEffect(() => {
-        let timeout: NodeJS.Timeout;
-        const handleScroll = (e: WheelEvent) => {
-            e.preventDefault();
-            if (timeout) clearTimeout(timeout);
-            timeout = setTimeout(() => {
-                const delta = Math.sign(e.deltaY);
-                const sections = document.querySelectorAll(`.${styles.sectionWrapper}`);
-                let currentSection = 0;
-                sections.forEach((section, index) => {
-                    if (window.scrollY >= (section as HTMLElement).offsetTop && window.scrollY < (section as HTMLElement).offsetTop + (section as HTMLElement).clientHeight) {
-                        currentSection = index;
-                    }
-                });
-                const nextSection = Math.min(
-                    sections.length - 1,
-                    Math.max(0, currentSection + delta)
-                );
-                (sections[nextSection] as HTMLElement).scrollIntoView({ behavior: 'smooth' });
-            }, 150);
-        };
-        window.addEventListener('wheel', handleScroll, { passive: false });
-        return () => window.removeEventListener('wheel', handleScroll);
-    }, []);
+  const learnMoreRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef(null);
+
+  const [showTopNav, setShowTopNav] = useState(false);
+  const [showPeninsula, setShowPeninsula] = useState(false);
+  const handleClick = () => {
+    learnMoreRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  useEffect(() => {
+    const container = containerRef.current;
+    let timeout: NodeJS.Timeout;
+
+    const handleScroll = (e: WheelEvent) => {
+      e.preventDefault();
+      if (timeout) clearTimeout(timeout);
+
+      timeout = setTimeout(() => {
+        const delta = Math.sign(e.deltaY);
+
+        if (container === null) return;
+
+        (container as HTMLElement).scrollBy({
+          top: delta,
+          behavior: "smooth",
+        });
+      }, 150);
+    };
+
+    window.addEventListener("wheel", handleScroll, { passive: false });
+    return () => window.removeEventListener("wheel", handleScroll);
+  }, []);
 
   return (
-    <div className={styles.container}>
-      <div className={styles.sectionWrapper}>
-        <div className={styles.background}></div>
-        <div className={styles.centerWrapper}>
-          <h1 className={styles.title}>
-            <span className={styles.highlight}>Fluid</span>Noti
-          </h1>
-          <div className={styles.separator}></div>
-          <p className={styles.description}>Dynamic island experience for your MacBook</p>
-          <div className={styles.buttonGroup}>
-            <BuyButton />
-            <LearnMoreButton />
-          </div>
-        </div>
-        <DynamicPeninsula />
-      </div>
+    <>
+      <AnimatePresence>{showTopNav && <TopNav />}</AnimatePresence>
 
-      <div className={styles.sectionWrapper}>
-        <Section 
-          title={<span>< i className="ri-music-2-line"></i> Now Playing
-          </span>}
-        content={
-          <span>
-            <span className={styles.bold}>FluidNoti</span> supports Spotify, Apple Music, and other music players, displaying the current song and artist in a beautiful notification.
-          </span>
-        }
-          videoUrl="/nowplaying.png"
-        />
-      </div>
+      <div ref={containerRef} className={styles.container}>
+        <section id="section" className={styles.sectionWrapper}>
+          <AnimatePresence>
+            <motion.div
+              className={styles.centerWrapper}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{
+                duration: 1.3,
+              }}
+              onAnimationComplete={() => setShowPeninsula(true)}
+            >
+              <h1 className={styles.title}>
+                <span className={styles.highlight}>Fluid</span>Noti
+              </h1>
+              <hr />
+              <p className={styles.description}>
+                Dynamic island experience for your MacBook
+              </p>
+              <motion.div
+                className={styles.buttonGroup}
+                initial={{ opacity: 0 }}
+                animate={{
+                  opacity: 1,
+                  transition: { staggerChildren: 1.5, delay: 2 },
+                }}
+              >
+                <Button
+                  text="Buy on Gumroad"
+                  icon="ri-shopping-cart-2-line"
+                  href="https://crissnb.gumroad.com/l/fluidnoti"
+                  purchaseButton={true}
+                />
+                <Button
+                  text="Learn More"
+                  icon="ri-arrow-down-s-line"
+                  onClick={handleClick}
+                  purchaseButton={false}
+                />
+              </motion.div>
+            </motion.div>
+            {showPeninsula && (
+              <motion.div
+                className={styles.dynamicPeninsula}
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ opacity: 1, height: "100%" }}
+                transition={{
+                  height: {
+                    type: "spring",
+                    stiffness: 100,
+                    damping: 75,
+                    mass: 0.5,
+                  },
+                  opacity: { duration: 0.4 },
+                }}
+              >
+                <video
+                  className={styles.video}
+                  src="/videos/dynamic-peninsula.webm"
+                  autoPlay
+                  loop
+                  muted
+                  controls={false}
+                />
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </section>
 
-      <div className={styles.sectionWrapper}>
-        <Section 
-          title={<span><i className="ri-settings-4-line"></i> Settings 
- </span>
-          }
-          content= { 
+        <section
+          id="section"
+          ref={learnMoreRef}
+          className={styles.sectionWrapper}
+        >
+          <SectionModule
+            title={
               <span>
-              <span className={styles.bold}>FluidNoti</span> allows you to customize the appearance of the notch, making it suitable for all kinds of MacBooks
+                <i className="ri-music-2-line"></i> Now Playing
               </span>
-          }
-          videoUrl="/settings.png"
-          reverse
-        />
-      </div>
+            }
+            content={
+              <span>
+                <span className={styles.bold}>FluidNoti</span> supports Spotify,
+                Apple Music, and other music players, displaying the current
+                song and artist in a beautiful notification.
+              </span>
+            }
+            videoUrl="/nowplaying.png"
+          />
+        </section>
 
-      <div className={styles.sectionWrapper}>
-        <MoreFeatures 
-          title={
+        <section id="section" className={styles.sectionWrapper}>
+          <SectionModule
+            title={
               <span>
-              < i className="ri-bard-fill"></i> and... more features to come
-          </span>}
-          content={
+                <i className="ri-settings-4-line"></i> Settings
+              </span>
+            }
+            content={
               <span>
-              Stay tuned for <span className={styles.bold}>upcoming features</span> that will enhance your experience.
-                  </span>
-        }
-        />
+                <span className={styles.bold}>FluidNoti</span> allows you to
+                customize the appearance of the notch, making it suitable for
+                all kinds of MacBooks
+              </span>
+            }
+            videoUrl="/settings.png"
+            reverse
+          />
+        </section>
+
+        <section id="section" className={styles.sectionWrapper}>
+          <MoreFeatures
+            title={
+              <span>
+                <i className="ri-bard-fill"></i> and... more features to come
+              </span>
+            }
+            content={
+              <span>
+                Stay tuned for{" "}
+                <span className={styles.bold}>upcoming features</span> that will
+                enhance your experience.
+              </span>
+            }
+          />
+        </section>
       </div>
-    </div>
+    </>
   );
 };
 
