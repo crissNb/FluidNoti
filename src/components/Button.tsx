@@ -1,4 +1,4 @@
-// src/components/BuyButton.tsx
+// src/components/Button.tsx
 import React from "react";
 import styles from "../styles/Button.module.scss";
 import "remixicon/fonts/remixicon.css";
