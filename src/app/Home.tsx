@@ -1,5 +1,4 @@
 "use client";
-
 import React, { useEffect, useRef, useState } from "react";
 import Button from "../components/Button";
 import SectionModule from "../components/Section";
@@ -9,7 +8,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import TopNav from "@/components/TopNav";
 import { debounce } from "./helper";
 
-const Home: React.FC = () => {
+export const Home: React.FC = () => {
   const learnMoreRef = useRef<HTMLDivElement>(null);
   const containerRef = React.useRef<HTMLDivElement | null>(null);
 
@@ -22,9 +21,7 @@ const Home: React.FC = () => {
     const container = containerRef.current;
 
     const handleScroll = (e: WheelEvent) => {
-      e.preventDefault();
-
-      const smoothScroll = debounce(() => {
+      debounce(() => {
         const delta = Math.sign(e.deltaY);
 
         if (container === null) return;
@@ -34,7 +31,6 @@ const Home: React.FC = () => {
           behavior: "smooth",
         });
       }, 150);
-      smoothScroll();
     };
 
     window.addEventListener("wheel", handleScroll, { passive: false });
@@ -173,5 +169,3 @@ const Home: React.FC = () => {
     </>
   );
 };
-
-export default Home;
